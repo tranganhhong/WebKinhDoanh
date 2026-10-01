@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <style>
+        /* Thiết lập nền trang web màu trắng, căn giữa nội dung */
+        body {
+            background-color: #ffffff; /* Nền 2 bên ngoài màu trắng */
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            color: #000;
+            margin: 0;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center; /* Căn toàn bộ khung ra chính giữa màn hình */
+        }
+
+        /* Khối màu xanh ở giữa trang */
+        .container {
+            width: 650px;
+            background-color: #99ccff; /* Toàn bộ màu xanh gom lại ở đây */
+            border: 2px solid #336699;  /* Viền xanh xung quanh khung */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Đổ bóng nhẹ tạo chiều sâu */
+            padding: 25px 20px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            margin: 12px 0 5px 0;
+            font-weight: bold;
+        }
+
+        p.subtitle {
+            margin: 0 0 15px 0;
+            font-size: 13px;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        td {
+            padding: 3px 4px;
+            vertical-align: middle;
+        }
+
+        .label-col {
+            text-align: right;
+            white-space: nowrap;
+            width: 140px;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #7f9db9;
+            margin: 10px 0;
+        }
+
+        input[type="text"], select, textarea {
+            border: 1px solid #7f9db9;
+            padding: 2px;
+            font-size: 13px;
+            background-color: #ffffff;
+        }
+
+        .btn-group {
+            text-align: center;
+            padding-top: 12px;
+        }
+
+        input[type="button"] {
+            padding: 3px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            border: 1px solid #707070;
+            margin: 0 3px;
+        }
+
+        input[type="button"]:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo Jackson Electronics -->
+        <img src="Jackson.gif" alt="Jackson Electronics" />
+
+        <h2>Registration Form</h2>
+        <p class="subtitle">Register your Jackson Electronics product here</p>
+
+        <form id="regForm" action="" method="post">
+            <table>
+                <!-- First Name & Last Name -->
+                <tr>
+                    <td class="label-col">First Name:</td>
+                    <td colspan="3">
+                        <input type="text" name="txtFirstName" id="txtFirstName" size="18" />
+                        &nbsp;&nbsp;Last Name:&nbsp;
+                        <input type="text" name="txtLastName" id="txtLastName" size="18" />
+</td>
+                </tr>
+
+                <!-- Address #1 -->
+                <tr>
+                    <td class="label-col">Address #1:</td>
+                    <td colspan="3">
+                        <input type="text" name="txtAddress1" id="txtAddress1" size="32" />
+                    </td>
+                </tr>
+
+                <!-- Address #2 -->
+                <tr>
+                    <td class="label-col">Address #2:</td>
+                    <td colspan="3">
+                        <input type="text" name="txtAddress2" id="txtAddress2" size="32" />
+                    </td>
+                </tr>
+
+                <!-- City, State, Zip -->
+                <tr>
+                    <td class="label-col">City:</td>
+                    <td colspan="3">
+                        <input type="text" name="txtCity" id="txtCity" size="22" />
+                        &nbsp;State:&nbsp;
+                        <input type="text" name="txtState" id="txtState" size="5" />
+                        &nbsp;Zip:&nbsp;
+                        <input type="text" name="txtZip" id="txtZip" size="10" />
+                    </td>
+                </tr>
+
+                <!-- Country -->
+                <tr>
+                    <td class="label-col">Country:</td>
+                    <td colspan="3">
+                        <input type="text" name="txtCountry" id="txtCountry" value="United States" size="22" />
+                    </td>
+                </tr>
+
+                <!-- Gạch ngang -->
+                <tr>
+                    <td colspan="4"><hr /></td>
+                </tr>
+
+                <!-- Product -->
+                <tr>
+                    <td class="label-col">Product:</td>
+                    <td colspan="3">
+                        <select name="ddlProduct" id="ddlProduct">
+                            <option value="ScanMaster" selected>ScanMaster</option>
+                            <option value="LaserJet">LaserJet</option>
+                            <option value="ColorPrinter">ColorPrinter</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <!-- Date Purchased -->
+                <tr>
+                    <td class="label-col">Date Purchased:</td>
+                    <td colspan="3">
+                        <input type="text" name="txtDatePurchased" id="txtDatePurchased" size="22" />
+                    </td>
+                </tr>
+
+                <!-- Serial # -->
+                <tr>
+                    <td class="label-col">Serial #:</td>
+                    <td colspan="3">
+                        <input type="text" name="txtSerial" id="txtSerial" size="22" />
+                    </td>
+                </tr>
+
+                <!-- Used for -->
+                <tr>
+                    <td class="label-col" style="vertical-align: top; padding-top: 5px;">Used for:</td>
+                    <td style="width: 140px;">
+<input type="radio" name="rdoUsedFor" value="Home" id="used_home" />
+                        <label for="used_home">Home</label><br />
+                        <input type="radio" name="rdoUsedFor" value="Business" id="used_biz" checked />
+                        <label for="used_biz">Business</label><br />
+                        <input type="radio" name="rdoUsedFor" value="Government" id="used_gov" />
+                        <label for="used_gov">Government</label>
+                    </td>
+                    <td colspan="2" style="vertical-align: top; padding-top: 5px;">
+                        <input type="radio" name="rdoUsedFor" value="Educational" id="used_edu" />
+                        <label for="used_edu">Educational Institution</label><br />
+                        <input type="radio" name="rdoUsedFor" value="Other" id="used_other" />
+                        <label for="used_other">Other</label>
+                    </td>
+                </tr>
+
+                <!-- System -->
+                <tr>
+                    <td class="label-col" style="vertical-align: top; padding-top: 5px;">System (check all that apply):</td>
+                    <td>
+                        <input type="checkbox" name="chkSystem" value="Windows" id="sys_win" />
+                        <label for="sys_win">Windows</label><br />
+                        <input type="checkbox" name="chkSystem" value="Macintosh" id="sys_mac" />
+                        <label for="sys_mac">Macintosh</label>
+                    </td>
+                    <td colspan="2" style="vertical-align: top; padding-top: 5px;">
+                        <input type="checkbox" name="chkSystem" value="UNIX" id="sys_unix" />
+                        <label for="sys_unix">UNIX</label><br />
+                        <input type="checkbox" name="chkSystem" value="Other" id="sys_other" />
+                        <label for="sys_other">Other</label>
+                    </td>
+                </tr>
+
+                <!-- Gạch ngang -->
+                <tr>
+                    <td colspan="4"><hr /></td>
+                </tr>
+
+                <!-- Comments -->
+                <tr>
+                    <td class="label-col" style="vertical-align: top;">Comments?:</td>
+                    <td colspan="3">
+                        <textarea name="txtComments" id="txtComments" rows="5" cols="45"></textarea>
+                    </td>
+                </tr>
+
+                <!-- Hai nút bấm chức năng -->
+                <tr>
+                    <td colspan="4" class="btn-group">
+                        <input type="button" value="Click to register" onclick="btnRegister()" />
+                        <input type="button" value="Click to cancel" onclick="btnClearForm()" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        function btnRegister() {
+            alert("Đăng ký thành công!");
+        }
+
+        function btnClearForm() {
+var form = document.getElementById("regForm");
+            
+            var inputs = form.querySelectorAll("input[type='text']");
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].value = "";
+            }
+
+            var textareas = form.querySelectorAll("textarea");
+            for (var i = 0; i < textareas.length; i++) {
+                textareas[i].value = "";
+            }
+
+            var radios = form.querySelectorAll("input[type='radio']");
+            for (var i = 0; i < radios.length; i++) {
+                radios[i].checked = false;
+            }
+
+            var checkboxes = form.querySelectorAll("input[type='checkbox']");
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = false;
+            }
+
+            var selects = form.querySelectorAll("select");
+            for (var i = 0; i < selects.length; i++) {
+                selects[i].selectedIndex = 0;
+            }
+        }
+    </script>
+
+</body>
+</html>
