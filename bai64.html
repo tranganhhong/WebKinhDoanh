@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 64 - Dynamic Table</title>
+
+    <style>
+        .container {
+            width: 435px;
+            border: 1px solid black;
+            padding: 5px;
+            margin: 0 auto;
+        }
+
+        #myTable {
+            width: 365px;
+            border-collapse: collapse;
+        }
+
+        #myTable td {
+            border: 1px solid #999;
+            padding: 2px;
+        }
+
+        #myTable td {
+            cursor: pointer;
+        }
+
+        #myTable td.selected {
+            background-color: red;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <p id="clock"></p>
+
+        <p id="message">
+            Click chuột vào dòng này. Sẽ xuất hiện thông báo phím bấm của chuột
+        </p>
+
+        <table id="myTable">
+            <tr>
+                <td>Thêm dòng mới ở đây</td>
+                <td>Thêm dòng mới ở đây</td>
+            </tr>
+            <tr>
+                <td>Thêm dòng mới ở đây</td>
+                <td>Thêm dòng mới ở đây</td>
+            </tr>
+            <tr>
+                <td>Thêm dòng mới ở đây</td>
+                <td>Thêm dòng mới ở đây</td>
+            </tr>
+            <tr>
+                <td>Dòng 1 cột 1</td>
+                <td>Dòng 1 cột 2</td>
+            </tr>
+            <tr>
+                <td>Dòng 2 cột 1</td>
+                <td>Dòng 2 cột 2</td>
+            </tr>
+            <tr>
+                <td>Dòng 3 cột 1</td>
+                <td>Dòng 3 cột 2</td>
+            </tr>
+        </table>
+
+        <div class="buttons">
+            <button onclick="addRow()">Thêm vào</button>
+            <button onclick="deleteCells()">Xóa</button>
+            <button onclick="showRows()">Chỉ hiện dòng</button>
+            <button onclick="showColumns()">Chỉ hiện cột</button>
+            <button onclick="openNewPage()">Mở một trang mới</button>
+        </div>
+    </div>
+
+    <script>
+        var table = document.getElementById("myTable");
+
+        // 1. Đồng hồ điện tử
+        function updateClock() {
+            var now = new Date();
+
+            var h = String(now.getHours()).padStart(2, "0");
+            var m = String(now.getMinutes()).padStart(2, "0");
+            var s = String(now.getSeconds()).padStart(2, "0");
+
+            document.getElementById("clock").innerHTML =
+                h + ":" + m + ":" + s;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // 2. Thông báo chuột trái và chuột phải
+        var message = document.getElementById("message");
+
+        message.addEventListener("mousedown", function(event) {
+            if (event.button === 0) {
+                alert("Bạn vừa nhấn chuột trái!");
+            } else if (event.button === 2) {
+                alert("Bạn vừa nhấn chuột phải!");
+            }
+        });
+
+        message.addEventListener("contextmenu", function(event) {
+            event.preventDefault();
+        });
+
+        // 3. Chọn từng ô để tô đỏ
+        table.addEventListener("click", function(event) {
+            var cell = event.target.closest("td");
+
+            if (cell && table.contains(cell)) {
+                if (cell.dataset.deleted === "true") {
+                    return;
+                }
+
+                cell.classList.toggle("selected");
+            }
+        });
+
+        // 4. Thêm một TR gồm hai TD
+        function addRow() {
+            var row = table.insertRow(0);
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+
+            cell1.innerHTML = "Thêm dòng mới ở đây";
+            cell2.innerHTML = "Thêm dòng mới ở đây";
+        }
+
+        // 5. Xóa hẳn ô được chọn, giữ nguyên vị trí cột
+        function deleteCells() {
+            var selectedCells = table.querySelectorAll("td.selected");
+
+            if (selectedCells.length === 0) {
+                alert("Hãy chọn ô cần xóa!");
+                return;
+            }
+
+            selectedCells.forEach(function(cell) {
+                cell.classList.remove("selected");
+                cell.innerHTML = "&nbsp;";
+                cell.dataset.deleted = "true";
+                cell.style.backgroundColor = "white";
+                cell.style.border = "none";
+                cell.style.pointerEvents = "none";
+            });
+        }
+
+        // 6. Chỉ hiện các dòng có ô được chọn
+        function showRows() {
+            var selectedCells = table.querySelectorAll("td.selected");
+
+            if (selectedCells.length === 0) {
+                alert("Hãy chọn ít nhất một ô!");
+                return;
+            }
+
+            var selectedRows = [];
+
+            selectedCells.forEach(function(cell) {
+                if (!selectedRows.includes(cell.parentElement)) {
+                    selectedRows.push(cell.parentElement);
+                }
+            });
+
+            for (var i = 0; i < table.rows.length; i++) {
+                table.rows[i].style.display =
+                    selectedRows.includes(table.rows[i]) ? "" : "none";
+            }
+        }
+
+        // 7. Chỉ hiện cột chứa ô được chọn
+        function showColumns() {
+            var selectedCells = table.querySelectorAll("td.selected");
+
+            if (selectedCells.length === 0) {
+                alert("Hãy chọn ô trong cột muốn hiển thị trước!");
+                return;
+            }
+
+            var selectedColumns = [];
+
+            selectedCells.forEach(function(cell) {
+                if (!selectedColumns.includes(cell.cellIndex)) {
+                    selectedColumns.push(cell.cellIndex);
+                }
+            });
+
+            for (var i = 0; i < table.rows.length; i++) {
+                for (var j = 0; j < table.rows[i].cells.length; j++) {
+                    table.rows[i].cells[j].style.display =
+                        selectedColumns.includes(j) ? "" : "none";
+                }
+            }
+        }
+
+        // 8. Mở trang web mới
+        function openNewPage() {
+            window.open("https://tranduythanh.com", "_blank");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 63 - Đăng ký thành viên</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            font-size: 16px;
+            margin: 8px;
+        }
+
+        .container {
+            border: 1px solid #3978ff;
+            padding: 6px;
+            width: 650px;
+            max-width: calc(100% - 28px);
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 30px;
+            margin: 0 0 22px;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #aaa;
+            margin-bottom: 16px;
+        }
+
+        .form-row {
+            margin: 3px 0;
+        }
+
+        .label {
+            display: inline-block;
+            min-width: 98px;
+        }
+
+        input[type="text"], input[type="email"] {
+            box-sizing: border-box;
+            height: 22px;
+        }
+
+        #txtName {
+            width: 176px;
+        }
+
+        #txtEmail {
+            width: 176px;
+        }
+
+        select {
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        .group-title {
+            margin-top: 17px;
+            margin-bottom: 3px;
+        }
+
+        .options {
+            margin-left: 16px;
+        }
+
+        .options label {
+            display: block;
+            width: max-content;
+            margin: 2px 0;
+        }
+
+        .color-option {
+            padding-right: 3px;
+        }
+
+        .color-blue { background: blue; color: black; }
+        .color-red { background: red; color: black; }
+        .color-yellow { background: yellow; color: black; }
+        .color-green { background: #008000; color: black; }
+        .color-purple { background: #d36bd3; color: black; }
+
+        .buttons {
+            margin: 18px 0 16px 16px;
+        }
+
+        button {
+            font-family: inherit;
+            font-size: 15px;
+            padding: 2px 8px;
+            cursor: pointer;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 15px;
+        }
+
+        th, td {
+            border: 1px solid #555;
+            text-align: left;
+            padding: 1px 3px;
+            white-space: nowrap;
+        }
+
+        th {
+            background: blue;
+            color: white;
+        }
+
+        tbody tr {
+            background: white;
+        }
+
+        tbody tr:hover {
+            background: yellow;
+        }
+
+        @media (max-width: 600px) {
+            .container { overflow-x: auto; }
+            table { min-width: 620px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Đăng ký thành viên</h1>
+    <hr>
+
+    <form id="memberForm" novalidate>
+        <div class="form-row">
+            <label class="label" for="txtName">Tên(*)</label>
+            <input type="text" id="txtName" name="name">
+        </div>
+
+        <div class="form-row">
+            <span class="label">Ngày sinh(*)</span>
+            Ngày:
+            <select id="day" aria-label="Ngày"></select>
+            Tháng:
+            <select id="month" aria-label="Tháng"></select>
+            Năm:
+            <select id="year" aria-label="Năm"></select>
+        </div>
+
+        <div class="form-row">
+            <span class="label">Giới tính(*)</span>
+            <label><input type="radio" name="gender" value="Nam" checked> Nam</label>
+            <label><input type="radio" name="gender" value="Nữ"> Nữ</label>
+        </div>
+
+        <div class="form-row">
+            <label class="label" for="txtEmail">Email(*)</label>
+            <input type="email" id="txtEmail" name="email">
+        </div>
+
+        <div class="group-title">Sở thích của bạn:</div>
+        <div class="options" id="hobbies">
+            <label><input type="checkbox" value="Mua sắm" checked> Mua sắm</label>
+            <label><input type="checkbox" value="Du lịch" checked> Du lịch</label>
+            <label><input type="checkbox" value="Tán gẫu" checked> Tán gẫu</label>
+            <label><input type="checkbox" value="Đọc sách" checked> Đọc sách</label>
+            <label><input type="checkbox" value="Nghe nhạc" checked> Nghe nhạc</label>
+        </div>
+
+        <div class="group-title">Màu yêu thích của bạn:</div>
+        <div class="options" id="colors">
+            <label><input type="radio" name="favoriteColor" value="Màu xanh da trời" checked> <span class="color-option color-blue">Màu xanh da trời</span></label>
+            <label><input type="radio" name="favoriteColor" value="Màu đỏ"> <span class="color-option color-red">Màu đỏ</span></label>
+            <label><input type="radio" name="favoriteColor" value="Màu vàng"> <span class="color-option color-yellow">Màu vàng</span></label>
+            <label><input type="radio" name="favoriteColor" value="Màu xanh xanh lá cây"> <span class="color-option color-green">Màu xanh xanh lá cây</span></label>
+            <label><input type="radio" name="favoriteColor" value="Màu xanh tím"> <span class="color-option color-purple">Màu xanh tím</span></label>
+        </div>
+
+        <div class="buttons">
+            <button type="submit">Đăng ký</button>
+            <button type="button" id="btnNext">Tiếp</button>
+        </div>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Giới tính</th>
+                <th>Năm sinh</th>
+                <th>Sở thích</th>
+                <th>Màu yêu thích</th>
+            </tr>
+        </thead>
+        <tbody id="memberList">
+            <tr>
+                <td>Nguyễn Văn Bình</td>
+                <td>binh@gmail.com</td>
+                <td>Nam</td>
+                <td>02/02/1990</td>
+                <td>Đọc sách</td>
+                <td>Màu vàng</td>
+            </tr>
+            <tr>
+                <td>Nguyễn Thị An</td>
+                <td>nguyenthian@gmail.com</td>
+                <td>Nữ</td>
+                <td>01/01/1992</td>
+                <td>Tán gẫu, đọc sách</td>
+                <td>Màu đỏ</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Đối tượng lưu thông tin thành viên
+    class Member {
+        constructor(name, email, gender, day, month, year, hobbies, favoriteColor) {
+            this.name = name;
+            this.email = email;
+            this.gender = gender;
+            this.day = day;
+            this.month = month;
+            this.year = year;
+            this.hobbies = hobbies;
+            this.favoriteColor = favoriteColor;
+        }
+    }
+
+    // Nạp dữ liệu cho các combobox bằng vòng lặp
+    function loadSelectOptions() {
+        const daySelect = document.getElementById("day");
+        const monthSelect = document.getElementById("month");
+        const yearSelect = document.getElementById("year");
+
+        for (let day = 1; day <= 31; day++) {
+            daySelect.add(new Option(String(day).padStart(2, "0"), day));
+        }
+
+        for (let month = 1; month <= 12; month++) {
+            monthSelect.add(new Option(month, month));
+        }
+
+        for (let year = 1970; year <= 2026; year++) {
+            yearSelect.add(new Option(year, year));
+        }
+
+        daySelect.value = "1";
+        monthSelect.value = "1";
+        yearSelect.value = "1970";
+    }
+
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function getSelectedValue(name) {
+        const selected = document.querySelector('input[name="' + name + '"]:checked');
+        return selected ? selected.value : "";
+    }
+
+    function getSelectedHobbies() {
+        return Array.from(document.querySelectorAll('#hobbies input[type="checkbox"]:checked'))
+            .map(item => item.value);
+    }
+
+    function addMemberToTable(member) {
+        const tbody = document.getElementById("memberList");
+        const row = tbody.insertRow();
+        const birthDate = member.day.padStart(2, "0") + "/" +
+                          member.month.padStart(2, "0") + "/" + member.year;
+        const values = [
+            member.name,
+            member.email,
+            member.gender,
+            birthDate,
+            member.hobbies.join(", ") || "Không có",
+            member.favoriteColor
+        ];
+
+        values.forEach(value => {
+            const cell = row.insertCell();
+            // Dùng textContent để hiển thị dữ liệu an toàn
+            cell.textContent = value;
+        });
+    }
+
+    function registerMember(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("txtName").value.trim();
+        const email = document.getElementById("txtEmail").value.trim();
+
+        if (name === "") {
+            alert("Vui lòng nhập họ tên!");
+            document.getElementById("txtName").focus();
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            alert("Vui lòng nhập email hợp lệ!");
+            document.getElementById("txtEmail").focus();
+            return;
+        }
+
+        const member = new Member(
+            name,
+            email,
+            getSelectedValue("gender"),
+            document.getElementById("day").value,
+            document.getElementById("month").value,
+            document.getElementById("year").value,
+            getSelectedHobbies(),
+            getSelectedValue("favoriteColor")
+        );
+
+        addMemberToTable(member);
+        alert("Đăng ký thành công!");
+    }
+
+    function clearForm() {
+        document.getElementById("memberForm").reset();
+        document.getElementById("txtName").value = "";
+        document.getElementById("txtEmail").value = "";
+        document.getElementById("txtName").focus();
+    }
+
+    document.getElementById("memberForm").addEventListener("submit", registerMember);
+    document.getElementById("btnNext").addEventListener("click", clearForm);
+
+    loadSelectOptions();
+</script>
+</body>
+</html>
